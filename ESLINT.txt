@@ -1,0 +1,1 @@
+É um ferramenta de desenvolvimento para identificar e reportar padrões de codificação insconsistentes e potenciais problemas no seu código. Ele atua como um "linter", analisando seu código em busca de erros sintáticos, semânticos e violações de regras de estilo pre-definidas.
