@@ -1,25 +1,31 @@
 {
-  "name": "movieflix-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "npx tsx watch src/server.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.2",
-    "eslint": "^9.17.0",
-    "globals": "^15.14.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.2"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
-  }
+   "name": "movieflix-api",
+   "version": "1.0.0",
+   "main": "index.js",
+   "scripts": {
+      "dev": "npx tsx watch src/server.ts",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "description": "",
+   "devDependencies": {
+      "@eslint/js": "^9.17.0",
+      "@types/express": "^5.0.0",
+      "@types/node": "^16.11.10",
+      "eslint": "^9.17.0",
+      "globals": "^15.14.0",
+      "tsx": "^4.19.2",
+      "typescript": "4.5.2",
+      "typescript-eslint": "^8.18.2",
+      "ts-node": "10.9.1"
+   },
+   "dependencies": {
+      "express": "^4.21.2",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.3.20"
+   }
 }
