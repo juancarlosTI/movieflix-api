@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
 import { Genre } from "./Genres";
+import { Languages } from "./Languages";
 
 @Entity("filmes") // Nome da tabela no banco de dados - Se não existir, o TYPEORM cria uma nova tabela.
 
@@ -13,13 +14,15 @@ export class Movie {
     @Column({nullable:true,  type: "date" })
       release_date!: Date;
 
-    @Column({nullable:true, type:"int"})
-      language_id!: number;
+    @ManyToOne(() => Languages, (languages)=> languages.movies)
+    @JoinColumn({name:"language_id"})
+      language_id!: Languages;
     
+
     @Column({nullable:true, type:"int"})
       oscar_count!: number;
 
     @ManyToOne(() => Genre, (genres) => genres.movies)
     @JoinColumn({name:"genre_id"})
-      genre?: Genre;
+      genre!: Genre;
 }

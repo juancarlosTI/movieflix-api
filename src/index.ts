@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Movie } from "./entity/Movie";
 import { Genre } from "./entity/Genres";
+import { Languages } from "./entity/Languages";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   database: "movieflix",
   synchronize: true,
   logging: true,
-  entities: [Movie, Genre],
+  entities: [Movie, Genre, Languages],
   subscribers: [],
   migrations: [],
 });
