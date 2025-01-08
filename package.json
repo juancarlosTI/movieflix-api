@@ -1,10 +1,9 @@
 {
    "name": "movieflix-api",
    "version": "1.0.0",
-   "main": "index.js",
+   "main": "index.ts",
    "scripts": {
-      "dev": "npx tsx watch src/server.ts",
-      "start": "ts-node src/index.ts",
+      "dev": "tsx watch src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
    },
    "keywords": [],
@@ -17,9 +16,8 @@
       "@types/node": "^16.11.10",
       "eslint": "^9.17.0",
       "globals": "^15.14.0",
-      "ts-node": "10.9.1",
       "tsx": "^4.19.2",
-      "typescript": "4.5.2",
+      "typescript": "^5.7.2",
       "typescript-eslint": "^8.18.2"
    },
    "dependencies": {

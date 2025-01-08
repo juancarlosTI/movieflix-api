@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Movie } from "./Movie";
 
 
@@ -8,7 +8,7 @@ export class Genre {
     @PrimaryGeneratedColumn()
       id!:number;
 
-    @Column({length: 100})
+    @Column("varchar",{length: 100})
       name!: string;
 
     @OneToMany(() => Movie, (movie) => movie.genre)

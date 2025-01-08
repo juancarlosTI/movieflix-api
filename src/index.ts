@@ -1,27 +1,19 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
-import { Movie } from "./entity/Movie";
-import { Genre } from "./entity/Genres";
-import { Languages } from "./entity/Languages";
+import express from "express";
+import Routes from "./routes/routes";
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "1234",
-  database: "movieflix",
-  synchronize: true,
-  logging: true,
-  entities: [Movie, Genre, Languages],
-  subscribers: [],
-  migrations: [],
+
+// Inicializar Express
+
+const port = 3000;
+const app = express();
+
+// Middlewares
+app.use(express.json());
+
+// Rotas
+app.use("/movies", Routes);
+
+app.listen(port, () => {
+  console.log(`Porta ${port} - http://localhost:3000`);
 });
-
-
-AppDataSource.initialize()
-  .then(() => {
-    // here you can start to work with your database
-    console.log("Conexão com o banco OK");
-  })
-  .catch((error) => console.log(error));
