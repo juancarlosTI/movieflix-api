@@ -8,7 +8,7 @@ export class Movie {
     @PrimaryGeneratedColumn()
       id!: number;
 
-    @Column("varchar",{nullable:true})
+    @Column({type:"varchar"})
       title!: string;
 
     @Column({nullable:true,  type: "date" })
