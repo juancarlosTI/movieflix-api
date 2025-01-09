@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AppDataSource } from "../database";
 import { Movie } from "../entity/Movie";
+import { ILike } from "typeorm";
 
 const router = Router();
 
@@ -32,22 +33,79 @@ router.post("/", async (req, res) => {
   // - Campo que requer tipo 'number', mesmo se preenchido entre aspas, será salvo como um NUMBER.
   // - Campo que requer tipo 'date', é preenchido com strings e é formatado pela entidade para ser um tipo DATE.
   // Colocar um tipo diferente de entrada resulta em um erro nos campos: NUMBER e DATE. Ex: colocar 'caracteres' onde deve ser number.
-  
+
   // A realização da verificação de tipo de entrada deve ser feita manualmente.
-  try{
+
+
+  // Verificação de registros duplicados
+  const movieWithSameTitle = await movieRepository.find({
+    where: {
+      title: ILike(title)
+    }
+  });
+
+  if (movieWithSameTitle.length > 0) {
+    res.status(409).send({ message: "Já existe um filme com o título" });
+    return;
+  }
+
+  try {
     await movieRepository.save({
       title: title,
       release_date: release_date,
-      language_id: {id: language_id},
+      language_id: { id: language_id },
       oscar_count: oscar_count,
-      genre: {id: genre}
+      genre: { id: genre }
     });
-    res.status(201).json({message:"Registrado!"});
-  }catch (error){
-    res.status(500).send({message:"Falha ao cadastrar o filme", error:error});
+    res.status(201).json({ message: "Registrado!" });
+  } catch (error) {
+    res.status(500).send({ message: "Falha ao cadastrar o filme", error: error });
   }
-  
-  
+
+
 });
 
+router.put("/:id", async (req, res) => {
+  const id = Number(req.params.id);
+
+  const movie = await movieRepository.findOne({
+    where: {
+      id: id
+    }
+  });
+  
+  if (!movie) {
+    return res.status(409).json({ message: "ID inválido - Não existe no banco de dados" });
+  }
+
+  try {
+    await movieRepository.update(id, req.body);
+    res.status(200).json({ message: "Atualizado com sucesso", data: req.body });
+  }
+  catch (error) {
+    res.status(500).json({ message: "Erro do servidor : ", error: error });
+  }
+
+});
+
+router.delete("/:id", async (req,res) => {
+  const id = Number(req.params.id);
+  
+  const movie = await movieRepository.findOne({
+    where: {id}
+  });
+  
+  if (!movie) {
+    return res.status(404).json({ message: "ID inválido - Não existe no banco de dados" });
+  }
+
+  try {
+    await movieRepository.delete(id);
+    res.status(200).json({ message: "Deletado com sucesso"});
+  }
+  catch (error) {
+    res.status(500).json({ message: "Erro do servidor : ", error: error });
+  }
+
+});
 export default router;
