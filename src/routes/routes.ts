@@ -21,6 +21,22 @@ router.get("/", async (_, res) => {
   res.json(movies);
 });
 
+router.get("/:genreName", async (req,res) => {
+  const genreName = req.params.genreName;
+  
+  const filteredMovies = await movieRepository.find({
+    relations:["language_id", "genre"],
+    where: {
+      genre:{name: ILike(genreName)}}
+  });
+
+  if (filteredMovies.length == 0){
+    return res.status(404).json({message:"Genero inexistente"});
+  }
+
+  res.status(200).send(filteredMovies);
+});
+
 router.post("/", async (req, res) => {
   const { title, release_date, language_id, oscar_count, genre } = req.body;
 
