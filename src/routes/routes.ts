@@ -91,7 +91,7 @@ router.put("/:id", async (req, res) => {
   });
   
   if (!movie) {
-    return res.status(409).json({ message: "ID inválido - Não existe no banco de dados" });
+    return res.status(404).json({ message: "ID inválido - Não existe no banco de dados" });
   }
 
   try {
