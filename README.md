@@ -1,7 +1,7 @@
-# Awesome Project Build with TypeORM
+# Para a documentação, consulte o swagger.
 
 Steps to run this project:
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
+1. Run `npm install` command
+2. node ...
 3. Run `npm start` command
